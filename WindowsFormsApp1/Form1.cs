@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -18,11 +19,12 @@ namespace WindowsFormsApp1
         }
 
         //*******************1.SORU**************************
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
-            Random random = new Random();                       //---> rastgele nesnesi
-            int row = 4;                                        //---> satır
-            int column = 3;                                     //---> sütun
+            await Task.Run(() => { Thread.Sleep(100); });
+            Random random = new Random();                      
+            int row = 4;                                        
+            int column = 3;                                     
 
             //int[,] array = new int[row, column];              //---> iki boyutlu dizi
 
@@ -32,8 +34,6 @@ namespace WindowsFormsApp1
                 arr[1] = new int[column];
                 arr[2] = new int[column];
                 arr[3] = new int[column];
-
-
             };
             // this.listBox1.MultiColumn = true; ---> Form1.Designer.cs kismina eklenecek 
             for (int i = 0; i < row; i++)
@@ -41,18 +41,18 @@ namespace WindowsFormsApp1
                 for (int j = 0; j < column; j++)
                 {
                     //array[i, j] = random.Next(1, 9);
-                    arr[i][j] = random.Next(1, 9);              //---> 1-9 aralığında rastgele sayı üreterek matrisi doldurur
+                    arr[i][j] = random.Next(1, 9);              
                 }
             }
-
-            int[] max = new int[row];                           //---> her satırdaki en büyük sayıların bilgisini tutmak için dizi
+            int[] max = new int[row];                           
             for (int a = 0; a < row; a++)
             {
-                listBox1.Items.Add(" " + arr[a][0] + "   " + arr[a][1] + "   " + arr[a][2]);  //---> yukarıda oluşturduğumuz matrisi listbox'a ekler
-                max[a] = arr[a].Max();                          //---> her bir satırdaki en büyük sayıyı bulur
+                listBox1.Items.Add(" " + arr[a][0] + "   " + arr[a][1] + "   " + arr[a][2]);  
+                max[a] = arr[a].Max();                          
             }
-            textBox1.Text = max[0].ToString() + " , " + max[1].ToString() + " , " + max[2].ToString() + " , " + max[3].ToString();  //---> max değerleri textbox'a ekler
-
+            textBox1.Text = max[0].ToString() + " , " + max[1].ToString() + " , " + max[2].ToString() + " , " + max[3].ToString();
+            
+            Thread.Sleep(100);
         }
 
         //*******************2.SORU**************************
@@ -78,6 +78,7 @@ namespace WindowsFormsApp1
                 }
                 completed = true;
             }
+            
         }
         //*******************3.SORU**************************
         private void button3_Click(object sender, EventArgs e)
